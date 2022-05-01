@@ -1,5 +1,7 @@
 const jwt = require('jsonwebtoken')
 const Soumissionnaire = require('../models/Soumissionnaire')
+const Admin = require('../models/Admin')
+const Evaluateur = require('../models/Evaluateur')
 
 const auth = (Model) => async (req, res, next) => {
     try{
@@ -16,6 +18,12 @@ const auth = (Model) => async (req, res, next) => {
         if (Model == Soumissionnaire) {
             req.token = token
             req.soumissionnaire = user        
+        } else if (Model == Admin) {
+            req.token = token
+            req.admin = user        
+        } else if (Model == Evaluateur) {
+            req.token = token
+            req.evaluateur = user        
         }
         next()
 
